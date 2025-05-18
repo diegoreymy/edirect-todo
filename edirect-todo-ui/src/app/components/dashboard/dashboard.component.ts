@@ -19,9 +19,9 @@ import { ErrorAlertComponent } from '../../shared/error-alert/error-alert.compon
     FormsModule,
     CreateProjectComponent,
     ProjectCardComponent,
-    ErrorAlertComponent
+    ErrorAlertComponent,
   ],
-  templateUrl: './dashboard.component.html'
+  templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
   projects: Project[] = [];
@@ -45,7 +45,7 @@ export class DashboardComponent implements OnInit {
       },
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message || err.message;
-      }
+      },
     });
   }
 
@@ -55,19 +55,19 @@ export class DashboardComponent implements OnInit {
       next: () => this.load(),
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message || err.message;
-      }
+      },
     });
   }
 
   editProject(project: Project): void {
-    const name = prompt('New name', project.name);
-    if (!name) return;
-    this.projectService.update({ id: project.id, name }).subscribe({
-      next: () => this.load(),
-      error: (err: HttpErrorResponse) => {
-        this.errorMessage = err.error?.message || err.message;
-      }
-    });
+    this.projectService
+      .update({ id: project.id, name: project.name })
+      .subscribe({
+        next: () => this.load(),
+        error: (err: HttpErrorResponse) => {
+          this.errorMessage = err.error?.message || err.message;
+        },
+      });
   }
 
   deleteProject(project: Project): void {
@@ -75,18 +75,18 @@ export class DashboardComponent implements OnInit {
       next: () => this.load(),
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message || err.message;
-      }
+      },
     });
   }
 
-  addTask(event: { project: Project; description: string }): void {
-    const { project, description } = event;
-    if (!description) return;
-    this.taskService.create(project.id, { description }).subscribe({
+  addTask(event: { project: Project; name: string }): void {
+    const { project, name } = event;
+    if (!name) return;
+    this.taskService.create(project.id, { name }).subscribe({
       next: () => this.load(),
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message || err.message;
-      }
+      },
     });
   }
 
@@ -105,13 +105,11 @@ export class DashboardComponent implements OnInit {
   }
 
   editTask(task: Task): void {
-    const desc = prompt('New name', task.description);
-    if (!desc) return;
-    this.taskService.update({ ...task, description: desc }).subscribe({
+    this.taskService.update(task).subscribe({
       next: () => this.load(),
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message || err.message;
-      }
+      },
     });
   }
 
@@ -120,7 +118,7 @@ export class DashboardComponent implements OnInit {
       next: () => this.load(),
       error: (err: HttpErrorResponse) => {
         this.errorMessage = err.error?.message || err.message;
-      }
+      },
     });
   }
 }

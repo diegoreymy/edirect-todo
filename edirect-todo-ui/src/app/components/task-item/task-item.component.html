@@ -7,12 +7,19 @@
       [disabled]="finished"
       (change)="onToggle()"
     />
-    <label class="form-check-label" [class.text-muted]="finished">
-      {{ task.description }}
-    </label>
+    <span class="form-check-label" [class.text-muted]="finished">
+      {{ task.name }}
+    </span>
   </div>
-  <div *ngIf="!finished">
-    <i class="bi bi-pencil-square me-2" (click)="onEdit()"></i>
-    <i class="bi bi-trash" (click)="onDelete()"></i>
+
+  <div *ngIf="!finished" class="d-flex align-items-center">
+    <i class="bi bi-pencil-square me-2" (click)="openDetail($event)"></i>
+    <i class="bi bi-trash me-2"       (click)="onDelete()"></i>
+    <app-task-detail-modal
+      [task]="task"
+      [visible]="showDetail"
+      (save)="onSave($event)"
+      (close)="closeDetail()"
+    ></app-task-detail-modal>
   </div>
 </li>

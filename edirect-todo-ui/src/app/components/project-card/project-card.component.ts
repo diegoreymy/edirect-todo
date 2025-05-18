@@ -5,19 +5,17 @@ import { TaskItemComponent } from '../task-item/task-item.component';
 import { TooltipComponent } from '../../shared/tooltip/tooltip.component';
 import { Project } from '../../models/project.model';
 import { Task } from '../../models/task.model';
+import { ProjectDetailModalComponent } from '../project-detail-modal/project-detail-modal.component';
 
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule, FormsModule, TaskItemComponent, TooltipComponent],
+  imports: [CommonModule, FormsModule, TaskItemComponent, TooltipComponent, ProjectDetailModalComponent],
   templateUrl: './project-card.component.html',
 })
 export class ProjectCardComponent {
   @Input() project!: Project;
-  @Output() addTask = new EventEmitter<{
-    project: Project;
-    description: string;
-  }>();
+  @Output() addTask = new EventEmitter<{ project: Project; name: string }>();
   @Output() toggleTask = new EventEmitter<Task>();
   @Output() editProject = new EventEmitter<Project>();
   @Output() deleteProject = new EventEmitter<Project>();
@@ -25,19 +23,20 @@ export class ProjectCardComponent {
   @Output() deleteTask = new EventEmitter<Task>();
 
   newTask = '';
+  showDetail = false;
 
   getPendingTasks(): Task[] {
-    return this.project?.tasks?.filter((t) => !t.completed) ?? [];
+    return this.project.tasks?.filter((t) => !t.completed) ?? [];
   }
 
   getDoneTasks(): Task[] {
-    return this.project?.tasks?.filter((t) => t.completed) ?? [];
+    return this.project.tasks?.filter((t) => t.completed) ?? [];
   }
 
   onAddTask(): void {
-    const desc = this.newTask.trim();
-    if (!desc) return;
-    this.addTask.emit({ project: this.project, description: desc });
+    const name = this.newTask.trim();
+    if (!name) return;
+    this.addTask.emit({ project: this.project, name });
     this.newTask = '';
   }
 
@@ -45,8 +44,18 @@ export class ProjectCardComponent {
     this.toggleTask.emit(task);
   }
 
-  onEditProject(): void {
-    this.editProject.emit(this.project);
+  openDetail(event: Event): void {
+    event.preventDefault();
+    this.showDetail = true;
+  }
+
+  closeDetail(): void {
+    this.showDetail = false;
+  }
+
+  onSaveProject(updated: Project): void {
+    this.editProject.emit(updated);
+    this.showDetail = false;
   }
 
   onDeleteProject(): void {

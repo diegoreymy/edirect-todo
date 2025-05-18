@@ -14,6 +14,7 @@ public class TaskMapper {
         if (task == null) return null;
         TaskDTO dto = new TaskDTO();
         dto.setId(task.getId());
+        dto.setName(task.getName());
         dto.setDescription(task.getDescription());
         dto.setCreationDate(task.getCreationDate());
         dto.setFinishDate(task.getFinishDate());
@@ -28,6 +29,7 @@ public class TaskMapper {
         if (dto == null) return null;
         Task task = new Task();
         task.setCreationDate(Instant.now());
+        task.setName(dto.getName());
         task.setDescription(dto.getDescription());
         task.setFinishDate(dto.getFinishDate());
         task.setCompleted(dto.getCompleted() != null ? dto.getCompleted() : false);

@@ -36,6 +36,7 @@ public class TaskService {
 
     public TaskDTO update(TaskDTO dto) {
         Task task = getTaskOrThrow(dto.getId());
+        task.setName(dto.getName());
         task.setDescription(dto.getDescription());
         task.setFinishDate(dto.getFinishDate());
         task.setCompleted(dto.getCompleted());

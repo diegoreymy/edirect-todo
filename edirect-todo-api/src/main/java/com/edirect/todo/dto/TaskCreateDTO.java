@@ -6,6 +6,7 @@ import java.time.Instant;
 
 @Data
 public class TaskCreateDTO {
+    private String name;
     private String description;
     private Instant finishDate;
     private Boolean completed;
