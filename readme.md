@@ -27,7 +27,7 @@ edirect-todo/
 1. In the root directory of the project, run:
 
    ```bash
-   docker-compose up --build
+   docker-compose up -d
    ```
 
 2. Wait for all services to start:
