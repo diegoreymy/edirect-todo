@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  edirect-todo-db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - edirect-todo-db-data:/var/lib/postgresql/data
+
+  edirect-todo-api:
+    build: ./edirect-todo-api
+    restart: on-failure
+    depends_on:
+      - edirect-todo-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://edirect-todo-db:5432/appdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - '8080:8080'
+
+  edirect-todo-ui:
+    build: ./edirect-todo-ui
+    restart: on-failure
+    depends_on:
+      - edirect-todo-api
+    ports:
+      - '4200:4200'
+
+volumes:
+  edirect-todo-db-data:
+

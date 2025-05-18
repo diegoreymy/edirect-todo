@@ -1,0 +1,23 @@
+# Directorio de compilación de Maven
+target/
+
+# Archivos de logs
+*.log
+
+# Archivos temporales
+*.tmp
+
+# IDEs y configuraciones locales
+.idea/
+*.iml
+.vscode/
+.settings/
+
+# Archivos de entorno
+.env
+
+# Sistema operativo
+.DS_Store
+
+# Metadata de Git
+.git
