@@ -53,11 +53,11 @@ public class ProjectService {
 
     private User getUserOrThrow(Long userId) {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     private Project getProjectOrThrow(Long projectId) {
         return projectRepository.findById(projectId)
-                .orElseThrow(() -> new IllegalArgumentException("Projeto não encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
     }
 }

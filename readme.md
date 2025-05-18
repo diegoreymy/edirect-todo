@@ -1,32 +1,27 @@
 # EDirectInsure TODO List
 
-Este projeto é uma aplicação de gerenciamento de tarefas, dividida em frontend (Angular) e backend (Spring Boot), orquestrada com Docker Compose.
+This project is a task management application, divided into frontend (Angular) and backend (Spring Boot), orchestrated with Docker Compose.
 
-## Estrutura do Projeto
+## Project Structure
 
-```
 edirect-todo/
 ├─ edirect-todo-api/    # Backend: Java 17 + Spring Boot + Maven
 ├─ edirect-todo-ui/     # Frontend: Angular 19
-└─ docker-compose.yml   # Orquestra serviços: PostgreSQL, API e UI
-```
+└─ docker-compose.yml   # Orchestrates services: PostgreSQL, API, and UI
 
-## Pré-requisitos
+## Prerequisites
 
-- Docker e Docker Compose instalados
+- Docker and Docker Compose installed
 
-## Execução com Docker
+## Running with Docker
 
-1. Na raiz do projeto, execute:
-   ```bash
-   docker-compose up --build
-   ```
-2. Aguarde até todos os serviços iniciarem:
-   - **edirect-todo-db** (PostgreSQL)
-   - **edirect-todo-api** (Spring Boot)
-   - **edirect-todo-ui** (Angular)
-3. Acesse no navegador:
-   ```
+1. In the root directory of the project, run:
+   docker-compose up -d
+
+2. Wait for all services to start:
+   - edirect-todo-db (PostgreSQL)
+   - edirect-todo-api (Spring Boot)
+   - edirect-todo-ui (Angular)
+
+3. Open your browser and go to:
    http://localhost:4200
-   ```
-

@@ -19,7 +19,7 @@ public class UserService {
     public UserDTO register(UserCreateDTO dto) {
         Optional<User> existingUser = userRepository.findByUsername(dto.getUsername());
         if (existingUser.isPresent()) {
-            throw new IllegalArgumentException("O nome de usuário já existe");
+            throw new IllegalArgumentException("Username already exists");
         }
         User user = userMapper.toEntity(dto);
         user.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt()));
@@ -29,9 +29,9 @@ public class UserService {
 
     public UserDTO authenticate(String username, String rawPassword) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("Usuário ou senha inválidos"));
+                .orElseThrow(() -> new IllegalArgumentException("Invalid username or password"));
         if (!BCrypt.checkpw(rawPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Usuário ou senha inválidos");
+            throw new IllegalArgumentException("Invalid username or password");
         }
         return userMapper.toDTO(user);
     }

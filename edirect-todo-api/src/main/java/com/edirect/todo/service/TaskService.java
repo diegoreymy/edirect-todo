@@ -54,11 +54,11 @@ public class TaskService {
 
     private Project getProjectOrThrow(Long projectId) {
         return projectRepository.findById(projectId)
-                .orElseThrow(() -> new IllegalArgumentException("Projeto não encontrado"));
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
     }
 
     private Task getTaskOrThrow(Long taskId) {
         return taskRepository.findById(taskId)
-                .orElseThrow(() -> new IllegalArgumentException("Tarefa não encontrada"));
+                .orElseThrow(() -> new IllegalArgumentException("Task not found"));
     }
 }
