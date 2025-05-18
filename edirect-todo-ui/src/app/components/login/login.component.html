@@ -1,0 +1,33 @@
+<app-error-alert [message]="errorMessage"></app-error-alert>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card p-4" style="width: 320px;">
+    <h4 class="card-title text-center mb-3">Sign in</h4>
+    <form (ngSubmit)="login()">
+      <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="User"
+          [(ngModel)]="credentials.username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          [(ngModel)]="credentials.password"
+          name="password"
+          required
+        />
+      </div>
+      <button class="btn btn-primary w-100" type="submit">
+        <i class="bi bi-box-arrow-in-right me-1"></i> Sign in
+      </button>
+    </form>
+  </div>
+</div>

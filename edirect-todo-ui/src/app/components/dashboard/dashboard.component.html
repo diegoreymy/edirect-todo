@@ -1,0 +1,23 @@
+<app-error-alert [message]="errorMessage"></app-error-alert>
+
+<div class="container">
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <app-create-project (create)="addProject($event)"></app-create-project>
+    </div>
+  </div>
+
+  <div class="row gy-4">
+    <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let project of projects">
+      <app-project-card
+        [project]="project"
+        (addTask)="addTask($event)"
+        (toggleTask)="toggleTask($event)"
+        (editProject)="editProject($event)"
+        (deleteProject)="deleteProject($event)"
+        (editTask)="editTask($event)"
+        (deleteTask)="deleteTask($event)">
+      </app-project-card>
+    </div>
+  </div>
+</div>

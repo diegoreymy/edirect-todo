@@ -1,0 +1,36 @@
+<app-error-alert [message]="errorMessage"></app-error-alert>
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card p-4" style="width: 320px;">
+    <h4 class="card-title text-center mb-3">Create your account</h4>
+    <form (ngSubmit)="register()">
+      <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="User"
+          [(ngModel)]="credentials.username"
+          name="username"
+          required
+        />
+      </div>
+      <div class="mb-3 input-group">
+        <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password"
+          [(ngModel)]="credentials.password"
+          name="password"
+          required
+        />
+      </div>
+      <button class="btn btn-success w-100" type="submit" [disabled]="!credentials.username || !credentials.password">
+        <i class="bi bi-person-plus me-1"></i> Create account
+      </button>
+      <div class="mt-3 text-center">
+        <a routerLink="/login">Back to login</a>
+      </div>
+    </form>
+  </div>
+</div>

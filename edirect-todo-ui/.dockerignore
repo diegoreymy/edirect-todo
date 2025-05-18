@@ -1,0 +1,12 @@
+# Dependencias y builds
+node_modules/
+dist/
+build/
+
+# Archivos de control de versiones y temporales
+.git/
+*.log
+
+# Configuraciones locales
+.env
+docker-compose.override.yml
